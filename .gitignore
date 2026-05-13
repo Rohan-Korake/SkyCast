@@ -16,8 +16,10 @@ build/
 
 # Editor and OS files
 .vscode/
+!.vscode/settings.json
 .DS_Store
 Thumbs.db
+.prettierrc
 
 # Tailwind and PostCSS cache
 .cache/
