@@ -27,6 +27,8 @@ export async function renderData(response) {
 
     if (key === "weatherIcon") {
       element.innerHTML = weatherData.weatherIcon;
+    } else if (key === "mapLocation") {
+      element.src = weatherData.mapLocation;
     } else {
       element.innerText = weatherData[key];
     }
@@ -50,6 +52,7 @@ function formatWeatherData(response) {
     cloud: `${response.clouds.all}%`,
     seaLevel: `${response.main.sea_level} hPa`,
     groundLevel: `${response.main.grnd_level} hPa`,
+    mapLocation: `https://www.google.com/maps?q=${response.coord.lat},${response.coord.lon}&z=12&output=embed`,
   };
 }
 
@@ -66,8 +69,6 @@ function formatTime(timestamp) {
 const regionNames = new Intl.DisplayNames(["en"], {
   type: "region",
 });
-
-console.log(regionNames.of("IN"));
 
 // set wheather icon according to weather condition
 function setWeatherIcon(weatherMain, cloudPercent) {

@@ -56,7 +56,7 @@ export function createMetrics() {
         ${element.leftIcon}
       </div>
       <div class="flex justify-start items-start flex-col ">
-        <div class="text-sm text-slate-100 h-full flex justify-start items-center w-30 md:text-lg lg:text-lg">${element.leftLabel}</div>
+        <div class="text-sm text-slate-100 h-full flex justify-start items-center w-20 md:w-30 md:text-lg lg:text-lg">${element.leftLabel}</div>
         <div class="text-xs  h-full flex justify-start items-center w-20 md:text-base lg:text-lg" id="${element.leftId}"></div>
       </div>
     </div>
@@ -66,7 +66,7 @@ export function createMetrics() {
         ${element.rightIcon}
       </div>
       <div class="flex justify-start items-start flex-col">
-        <div class="text-sm text-slate-100 h-full flex justify-start items-center w-30 md:text-lg lg:text-xl lg:w-41">${element.rightLabel}</div>
+        <div class="text-sm text-slate-100 h-full flex justify-start items-center w-20 md:w-35 md:text-lg lg:text-xl lg:w-41">${element.rightLabel}</div>
         <div class="text-xs h-full flex justify-start items-center w-20 md:text-base lg:text-lg" id="${element.rightId}"></div>
       </div>
     </div>
