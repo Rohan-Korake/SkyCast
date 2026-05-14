@@ -30,15 +30,19 @@
         </form>
     </header>
 
-    <!-- progressBar -->
-    <div class="h-[0.2rem] w-full bg-amber-300 lg:h-[0.3rem]">
-        <div id="progressBar"
-            class="h-full w-0.5 bg-linear-to-r from-blue-300 via-blue-400 to-blue-700 transition-all duration-500">
-        </div>
-    </div>
+    <!-- Header divider line -->
+    <div class="h-[0.2rem] w-full bg-amber-300 lg:h-[0.3rem]"></div>
 
     <!-- main conatiner -->
     <main class="w-full flex-1 flex flex-col transition-all duration-500">
+        <!-- loading screen  -->
+        <div id="loadingScreen"
+            class=" flex w-full h-full justify-center items-center flex-col bg-black/40 backdrop-blur-3xl border border-white/40 fixed inset-0 z-51">
+            <img src="src/assets/logo.svg" alt="sunny" class="w-25 md:w-30 lg:w-35 xl:40 animate-pulse">
+            <div class="text-slate-100 text-1xl md:text-3xl lg:text-4xl xl:text-4xl font-bold"> Fetching weather data...
+            </div>
+        </div>
+
         <!-- 404 error page  -->
         <div id="cityNotFoundPage"
             class="hidden w-full h-full justify-center items-center flex-col bg-black/10 backdrop-blur-3xl border border-white/40 fixed inset-0 z-50">
@@ -64,7 +68,8 @@
             </button>
         </div>
 
-        <div class="w-full h-full z-auto p-2 flex flex-col gap-2" id="wheatherDataContaner">
+        <!-- weather data UI page -->
+        <div id="wheatherDataContaner" class="w-full h-full z-auto p-2 hidden flex-col gap-2">
             <!-- Basic and matrics section  -->
             <div
                 class="flex justify-center items-center flex-col bg-black/10 backdrop-blur-xl border p-1 border-white/40 rounded-xl xl:flex-row ">
@@ -87,6 +92,8 @@
                     <iframe id="mapLocation" class="rounded-xl border-0 w-full h-80" loading="lazy">
                     </iframe>
                 </div>
+
+
             </div>
         </div>
     </main>

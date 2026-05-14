@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 });
 
 // handle error pages visibility
-export function toggleErrorPage(pageName, removeClass, addClass) {
+export function togglePageVisibility(pageName, removeClass, addClass) {
   pageName = document.getElementById(pageName);
   pageName.classList.remove(removeClass);
   pageName.classList.add(addClass);

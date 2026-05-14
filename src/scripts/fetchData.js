@@ -1,4 +1,4 @@
-import { toggleErrorPage } from "./main.js";
+import { togglePageVisibility } from "./main.js";
 import { renderData } from "./renderData.js";
 const progressBar = document.getElementById("progressBar");
 const searchButton = document.getElementById("searchButton");
@@ -14,18 +14,23 @@ export async function fetchData() {
   intputForm.addEventListener("submit", (e) => {
     e.preventDefault();
     searchButton.disabled = true;
-    startLoading();
     handleFetchRequest();
   });
 }
 
 // handle fetch request
 async function handleFetchRequest() {
+  togglePageVisibility("wheatherDataContaner", "flex", "hidden");
+  togglePageVisibility("loadingScreen", "hidden", "flex");
+  togglePageVisibility("cityNotFoundPage", "flex", "hidden");
+  togglePageVisibility("somethingWentWrongPage", "flex", "hidden");
+
   const inputCity = document.getElementById("inputCity");
   let city = inputCity.value;
-  toggleErrorPage("cityNotFoundPage", "flex", "hidden");
-  toggleErrorPage("somethingWentWrongPage", "flex", "hidden");
   if (!city) return;
+
+  // Extra delay for laoding aniamtion
+  await sleep(1000);
 
   try {
     const response = await fetch(
@@ -33,41 +38,33 @@ async function handleFetchRequest() {
     );
 
     let body = await response.json();
-    stopLoading();
+
+    togglePageVisibility("loadingScreen", "flex", "hidden");
+    togglePageVisibility("wheatherDataContaner", "hidden", "flex");
     searchButton.disabled = false;
 
     if (response.status == 200) {
       renderData(body);
     } else if (response.status == 404) {
-      toggleErrorPage("cityNotFoundPage", "hidden", "flex");
+      togglePageVisibility("cityNotFoundPage", "hidden", "flex");
     } else {
-      toggleErrorPage("somethingWentWrongPage", "hidden", "flex");
+      togglePageVisibility("somethingWentWrongPage", "hidden", "flex");
     }
   } catch (error) {
-    stopLoading();
+    togglePageVisibility("loadingScreen", "flex", "hidden");
     searchButton.disabled = false;
-    toggleErrorPage("somethingWentWrongPage", "hidden", "flex");
+    togglePageVisibility("somethingWentWrongPage", "hidden", "flex");
   }
 }
 
-// start loader
-function startLoading() {
-  progressBar.style.width = "50%";
-}
-
-// stop loader
-function stopLoading() {
-  progressBar.style.width = "100%";
-
-  setTimeout(() => {
-    progressBar.style.width = "0%";
-  }, 1000);
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 // handle retry button re-fetch request
 const retrybutton = document.getElementById("retrybutton");
 retrybutton.addEventListener("click", () => {
   searchButton.disabled = true;
-  startLoading();
+
   handleFetchRequest();
 });
