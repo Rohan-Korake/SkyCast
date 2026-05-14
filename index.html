@@ -33,7 +33,7 @@
     <!-- progressBar -->
     <div class="h-[0.2rem] w-full bg-amber-300 lg:h-[0.3rem]">
         <div id="progressBar"
-            class="h-full w-5 bg-linear-to-r from-blue-300 via-blue-400 to-blue-700 transition-all duration-500">
+            class="h-full w-0.5 bg-linear-to-r from-blue-300 via-blue-400 to-blue-700 transition-all duration-500">
         </div>
     </div>
 
@@ -41,7 +41,7 @@
     <main class="w-full flex-1 flex flex-col transition-all duration-500">
         <!-- 404 error page  -->
         <div id="cityNotFoundPage"
-            class="flex w-full h-full justify-center items-center flex-col bg-white/10 backdrop-blur-xl border border-white/40 z-10">
+            class="hidden w-full h-full justify-center items-center flex-col bg-white/10 backdrop-blur-xl border border-white/40 fixed inset-0 z-50">
             <img src="./src/assets/cloud404.svg" alt="404 error" class="w-40 md:w-45 lg:w-50">
             <div class="text-slate-100 text-3xl md:text-5xl lg:text-6xl xl:text-6xl font-black">4O4</div>
             <div class="text-slate-100 text-1xl md:text-3xl lg:text-4xl xl:text-4xl font-bold">Oops! City Not Found
@@ -54,7 +54,7 @@
 
         <!-- something went wrong page -->
         <div id="somethingWentWrongPage"
-            class="flex w-full h-full justify-center items-center flex-col bg-white/10 backdrop-blur-xl border border-white/40 z-10">
+            class="hidden w-full h-full justify-center items-center flex-col bg-white/10 backdrop-blur-xl border border-white/40 fixed inset-0 z-50">
             <img src="./src/assets/cloudError.svg" alt="Cloud error" class="w-40 md:w-45 lg:w-50">
             <div class="text-slate-100 text-1xl md:text-3xl lg:text-4xl xl:text-4xl font-bold">Something Went Wrong!
             </div>
@@ -63,10 +63,29 @@
                 Try Again
             </button>
         </div>
+
+        <div class="w-full h-full z-auto p-2 flex flex-col gap-2" id="wheatherDataContaner">
+            <!-- Basic and matrics section  -->
+            <div
+                class="flex justify-center items-center flex-col bg-white/10 backdrop-blur-xl border p-1 border-white/40 rounded-xl xl:flex-row ">
+                <div class=" p-1 flex justify-center items-center flex-col gap-1 w-full">
+                    <div class="w-15 md:w-18 lg:w-30 xl:w-35" id="weatherIcon"></div>
+                    <div class="text-slate-100 text-3xl md:text-5xl lg:text-6xl xl:text-5xl font-bold flex justify-center items-center"
+                        id="temperature"></div>
+                    <div class="text-slate-200 text-2xl md:text-3xl lg:text-4xl xl:text-3xl" id="description"></div>
+                    <div class="text-slate-200 text-1xl md:text-2xl lg:text-3xl xl:text-2xl" id="location">Sangli, In
+                    </div>
+                </div>
+                <!-- min-max, sunrise-sunset, humidity-pressure section  -->
+                <div class="w-full flex justify-center items-center flex-col" id="metricsContainer"></div>
+            </div>
+
+        </div>
     </main>
     <footer></footer>
 </body>
 
 <script type="module" src="src/scripts/main.js"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
 
 </html>

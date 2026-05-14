@@ -37,7 +37,7 @@ async function handleFetchRequest() {
     searchButton.disabled = false;
 
     if (response.status == 200) {
-      renderData(response);
+      renderData(body);
     } else if (response.status == 404) {
       toggleErrorPage("cityNotFoundPage", "hidden", "flex");
     } else {

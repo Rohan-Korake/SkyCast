@@ -1,9 +1,9 @@
+import { createMetrics } from "./createMetrics.js";
 import { fetchData } from "./fetchData.js";
 
-// entry point of application
-document.addEventListener("DOMContentLoaded", () => {
-  toggleErrorPage("cityNotFoundPage", "flex", "hidden");
-  toggleErrorPage("somethingWentWrongPage", "flex", "hidden");
+// Entry point of application
+document.addEventListener("DOMContentLoaded", async () => {
+  await createMetrics();
   fetchData();
 });
 
