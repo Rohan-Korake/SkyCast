@@ -18,6 +18,10 @@ export async function renderData(response) {
     seaLevel: "seaLevel",
     groundLevel: "groundLevel",
     mapLocation: "mapLocation",
+    feelsLike: "feelsLike",
+    windSpeed: "windSpeed",
+    dayLength: "dayLength",
+    lastUpdate: "lastUpdate",
   };
 
   // render the weather values into DOM
@@ -37,6 +41,7 @@ export async function renderData(response) {
 
 // format API response
 function formatWeatherData(response) {
+  console.log(response.main);
   return {
     location: `${response.name}, ${regionNames.of(response.sys.country)}`,
     weatherIcon: `<img src="${setWeatherIcon(response.weather[0].main, response.clouds.all)}" alt="weatherIcon">`,
@@ -53,7 +58,25 @@ function formatWeatherData(response) {
     seaLevel: `${response.main.sea_level} hPa`,
     groundLevel: `${response.main.grnd_level} hPa`,
     mapLocation: `https://www.google.com/maps?q=${response.coord.lat},${response.coord.lon}&z=12&output=embed`,
+    feelsLike: `${(response.main.feels_like - 273.15).toFixed(1)} °C`, //convert kelvin to celsius
+    windSpeed: `${response.wind.speed} m/s`,
+    dayLength: `${calculateDayLength(response.sys.sunrise, response.sys.sunset)}`, //calculate day length
+    lastUpdate: `${formatLateUpdate(response.dt)}`, //format time
   };
+}
+
+// calculate day length
+function calculateDayLength(sunrise, sunset) {
+  const dayLengthInSeconds = sunset - sunrise;
+  const hours = Math.floor(dayLengthInSeconds / 3600);
+  const minutes = Math.floor((dayLengthInSeconds % 3600) / 60);
+  const dayLength = `${hours}h ${minutes}m`;
+  return dayLength;
+}
+
+// format last update
+function formatLateUpdate(time) {
+  return new Date(time * 1000).toLocaleTimeString();
 }
 
 // format time

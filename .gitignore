@@ -23,3 +23,5 @@ Thumbs.db
 
 # Tailwind and PostCSS cache
 .cache/
+
+output.css
